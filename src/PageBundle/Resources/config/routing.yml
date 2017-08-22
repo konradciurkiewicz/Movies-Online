@@ -1,0 +1,22 @@
+_check_path:
+  path: /login-check
+
+_logout:
+  path: /logout
+
+page_user:
+  resource: "@PageBundle/Controller/UserController.php"
+  type: annotation
+  prefix: /
+
+
+page_pages:
+  resource: "@PageBundle/Controller/PagesController.php"
+  type: annotation
+  prefix: /
+
+
+page_videos:
+  resource: "@PageBundle/Controller/VideosController.php"
+  type: annotation
+  prefix: /

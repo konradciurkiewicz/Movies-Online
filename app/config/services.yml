@@ -1,0 +1,6 @@
+services:
+    page.twig_extension:
+        class: PageBundle\Twig\Extension\PageExtension
+        arguments: ["@doctrine"]
+        tags:
+            - { name: twig.extension }

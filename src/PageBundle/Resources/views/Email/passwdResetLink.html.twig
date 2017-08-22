@@ -1,0 +1,33 @@
+
+{% extends "PageBundle:Email:base.html.twig" %}
+{% block pageTitle %}
+    Resetowanie hasła  {{ parent()}}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent()}}
+{% endblock %}
+{% block pageDesc %}
+
+{% endblock %}
+{% block pageKeywords %}
+
+{% endblock %}
+{% block JavaScripts %}
+    {{ parent()}}
+
+{% endblock %}
+
+
+{% block pageContainer %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="jumbotron">
+                <h1>Resetowanie hasła</h1>
+                <p>Dostaliśmy prośbę o zresetowanie hasła do Twojego konta. Poniżej znajduje się link, dzięki któremu możesz tego dokonać.</p>
+                <p><a class="btn btn-primary btn-lg" href="{{ resetUrl }}" role="button">{{ resetUrl }}</a></p>
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

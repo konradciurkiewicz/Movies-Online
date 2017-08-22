@@ -1,0 +1,57 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+
+    encoders:
+        PageBundle\Entity\User:
+            algorithm: bcrypt
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        page_users:
+            entity:
+                class: PageBundle:User
+                property: username
+
+    role_hierarchy:
+            ROLE_EDITOR:      ROLE_USER
+            ROLE_ADMIN:       [ROLE_EDITOR, ROLE_USER]
+            ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_EDITOR, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        page_security:
+            pattern: ^/
+            anonymous: ~
+            form_login:
+                check_path: _check_path
+                login_path: page_login
+                default_target_path: page_index
+                username_parameter: login[username]
+                password_parameter: login[password]
+            logout:
+                path: _logout
+                target: page_index
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 31536000
+                path: /
+                domain: ~
+                remember_me_parameter: login[remember_me]
+
+        main:
+            anonymous: ~
+            # activate different ways to authenticate
+
+            # http_basic: ~
+            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+
+    access_control:
+        - { path: ^/account-settings, roles: ROLE_USER }
+        - { path: ^/user-panel, roles: ROLE_USER }
+        - { path: ^/form, roles: ROLE_USER }

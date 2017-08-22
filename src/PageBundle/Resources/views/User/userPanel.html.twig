@@ -1,0 +1,80 @@
+{% extends "PageBundle:base.html.twig" %}
+{% block pageTitle %}
+    Panel użytkownika {{ parent()}}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent()}}
+{% endblock %}
+{% block pageDesc %}
+    Szukasz najnowszych seriali lub filmów online? Świetnie! Gdzie-Ogladac.pl to najlepsza strona z linkami do najpopularniejszych seriali i filmów. Wszystko za darmo i bez rejestracji.
+
+{% endblock %}
+{% block pageKeywords %}
+    gdzie oglądać filmy online, gdzie oglądać filmy, gdzie oglądać seriale, seriale online, filmy online, filmy online bez rejestracji, seriale online bez rejestracji, gdzie, oglądać, darmowe, seriale, online, bez, rejestracji, strona, linki, gdzie, ogladac, linki, serial, seriali, filmy, flim, filmów, najnowsze
+
+{% endblock %}
+{% block JavaScripts %}
+    {{ parent()}}
+    <script>
+        $(document).ready(function(){
+            $("#add-button").click(function(){
+                $("#add-link-search").toggle('slow');
+            });
+        });
+    </script>
+{% endblock %}
+
+
+{% block pageContainer %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+
+                <div class="">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" class="active"><a href="{{ path('user_userPanel') }}">Moje video</a></li>
+                        <li role="presentation"> <a href="{{ path('user_userLinks') }}">Moje linki</a></li>
+                   </ul>
+                </div>
+
+            {% include 'PageBundle:Template:flashMsg.html.twig' %}
+            <div style="margin-top: 20px">
+                <a href="{{ path('user_postForm') }}" class="btn btn-raised btn-success btn-lg " role="button" ><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp; Dodaj film</a>
+            </div>
+            <hr/>
+            <h4>Moje filmy</h4>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tytuł video</th>
+                    <th>Kategoria</th>
+                    <th>Data dodania</th>
+                    <th>Akcja</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set counter = 0 %}
+                {% for post in pagination %}
+                    {% set counter = counter + 1 %}
+                    <tr>
+                        <td>{{ counter }}</td>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.category.name }}</td>
+                        <td>{{ post.createDate | date }}</td>
+                        <td><a class="btn btn-primary btn-sm" href="{{ path('user_postForm', {'id': post.id}) }}" role="button"><span class="glyphicon glyphicon-edit"></span></a>
+
+                            {#{% set tokenName = csrfProvider.generateCsrfToken(deleteTokenName|format(post.id)) %}#}
+                            {#{% set deleteUrl = path('user_videoDelete', {'id': post.id, 'token': tokenName}) %}#}
+
+                            {#<a class="btn btn-danger btn-sm" href="{{ path('deleteUrl') }}" data-confirmAction="" role="button"><span class="glyphicon glyphicon-trash"></span></a></td>#}
+                    </tr>
+                {% else %}
+                    <td colspan="5"><i>Brak elementów do wyświetlenia.</i></td>
+                  {% endfor %}
+                </tbody>
+            </table>
+            <div style="float: right">{{ knp_pagination_render(pagination, 'PageBundle:Pagination:pagination.html.twig' ) }}</div>
+        </div>
+    </div>
+{% endblock %}

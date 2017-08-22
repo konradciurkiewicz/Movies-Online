@@ -1,0 +1,118 @@
+{% extends "PageBundle:base.html.twig" %}
+{% block pageTitle %}
+    Panel użytkownika {{ parent()}}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent()}}
+{% endblock %}
+{% block pageDesc %}
+    Szukasz najnowszych seriali lub filmów online? Świetnie! Gdzie-Ogladac.pl to najlepsza strona z linkami do najpopularniejszych seriali i filmów. Wszystko za darmo i bez rejestracji.
+
+{% endblock %}
+{% block pageKeywords %}
+    gdzie oglądać filmy online, gdzie oglądać filmy, gdzie oglądać seriale, seriale online, filmy online, filmy online bez rejestracji, seriale online bez rejestracji, gdzie, oglądać, darmowe, seriale, online, bez, rejestracji, strona, linki, gdzie, ogladac, linki, serial, seriali, filmy, flim, filmów, najnowsze
+
+{% endblock %}
+
+
+
+{% block pageContainer %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+
+                <div class="">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" ><a href="{{ path('user_userPanel') }}">Moje video</a></li>
+                        <li role="presentation" class="active"> <a href="{{ path('user_userLinks') }}">Moje linki</a></li>
+                   </ul>
+                </div>
+
+            {% include 'PageBundle:Template:flashMsg.html.twig' %}
+
+            <div class="row">
+                <div  class="col-md-6">
+            <div id="add-link-search" >
+                <h4>Dodawanie linków</h4>
+                <p><strong>Krok 1.</strong> Wyszukaj film do którego chcesz dodać link</p>
+                <p><strong>Krok 2.</strong> Wybierz film do ktrego link chcesz dodać</p>
+                <p><strong>Krok 3.</strong> Dodaj link do wybranego filmu</p>
+                <form role="search" action="{{ path('page_search') }}">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" value="{{ searchParam is defined ? searchParam : '' }}" placeholder="Nazwa filmu">
+                                     <span class="input-group-btn">
+                                          <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span> </button>
+                                       </span>
+                    </div>
+                </form>
+
+            </div>
+                </div>
+
+
+        </div>
+            <hr/>
+            <h4>Moje filmy</h4>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tytuł video</th>
+                    <th>Odnośnik</th>
+                    <th>Data dodania</th>
+                    <th>Akcja</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set counter = 0 %}
+                {% for post in pagination %}
+                    {% set counter = counter + 1 %}
+                    <tr class="link-element">
+                        <td>{{ counter }}</td>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.comment }}</td>
+                        <td>{{ post.createDate | date }}</td>
+                        <td>
+                            {#{% set commentToken = csrfProvider.generateCsrfToken|format(post.id) %}#}
+                            {#{% set deleteUrl = path('page_deleteComment', {'commentId':post.id, 'token':commentToken}) %}#}
+                            <a class="btn btn-danger btn-sm delete-comment" href="{{ path('page_deleteComment', {'commentId':post.id}) }}" role="button"><span class="glyphicon glyphicon-trash"></span></a></td>
+                    </tr>
+                    {% else %}
+                    <td colspan="5"><i>Brak elementów do wyświetlenia.</i></td>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div style="float: right">{{ knp_pagination_render(pagination, 'PageBundle:Pagination:pagination.html.twig' ) }}</div>
+        </div>
+    </div>
+{% endblock %}
+ {% block JavaScripts %}
+     {{ parent() }}
+     <script>
+     $(document).ready(function(){
+
+     $('body').on('click', '.delete-comment', function(e){
+     e.preventDefault();
+
+     var $btn = $(this);
+     var deleteUrl = $btn.attr('href');
+
+     $.getJSON(deleteUrl, function(json){
+     alert(json.message);
+
+     if('ok' === json.status){
+     $btn.closest('.link-element').remove();
+     }
+     });
+     });
+
+     });
+     </script>
+     <script>
+         $(document).ready(function(){
+             $("#add-button").click(function(){
+                 $("#add-link-search").toggle('slow');
+             });
+         });
+     </script>
+ {% endblock %}

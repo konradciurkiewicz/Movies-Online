@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: localhost
+    database_port: null
+    database_name: konradc_gdzie
+    database_user: konradc_gdzie
+    database_password: dedur999
+    mailer_transport: smtp
+    mailer_host: gdzie-ogladac.pl
+    mailer_user: support@gdzie-ogladac.pl
+    mailer_password: dedur999
+    secret: fdsa34r4t545yu8k89p6hgf3sdcsfgh4trfge

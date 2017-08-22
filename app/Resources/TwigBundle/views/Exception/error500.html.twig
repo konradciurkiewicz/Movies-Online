@@ -1,0 +1,30 @@
+{% extends "PageBundle:base.html.twig" %}
+{% block pageTitle %}
+    Nie odnaleziono strony  {{ parent()}}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent()}}
+{% endblock %}
+{% block pageDesc %}
+{% endblock %}
+{% block pageKeywords %}
+
+{% endblock %}
+{% block JavaScripts %}
+    {{ parent()}}
+
+{% endblock %}
+
+
+{% block pageContainer %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="jumbotron">
+                <h1>Ups.. Błąd serwera</h1>
+                <p>Wystąpił błąd serwera. Proszę odświeżyć stronę za chwilę.</p>
+                <p><a class="btn btn-primary btn-lg" href="{{ path('page_index') }}" role="button">Wróć na strone główną</a></p>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

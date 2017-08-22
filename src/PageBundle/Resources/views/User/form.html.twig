@@ -1,0 +1,109 @@
+{% extends "PageBundle:base.html.twig" %}
+{% set pageTitle = video.id is null ? 'Dodawanie nowego filmu' : 'Edycja video "%s"'|format(video.title) %}
+
+{% block pageTitle %}
+    {{ pageTitle }}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent()}}
+{% endblock %}
+{% block pageDesc %}
+    Szukasz najnowszych seriali lub filmów online? Świetnie! Gdzie-Ogladac.pl to najlepsza strona z linkami do najpopularniejszych seriali i filmów. Wszystko za darmo i bez rejestracji.
+
+{% endblock %}
+{% block pageKeywords %}
+    gdzie oglądać filmy online, gdzie oglądać filmy, gdzie oglądać seriale, seriale online, filmy online, filmy online bez rejestracji, seriale online bez rejestracji, gdzie, oglądać, darmowe, seriale, online, bez, rejestracji, strona, linki, gdzie, ogladac, linki, serial, seriali, filmy, flim, filmów, najnowsze
+
+{% endblock %}
+{% block JavaScripts %}
+    {{ parent()}}
+
+{% endblock %}
+
+
+{% block pageContainer %}
+    <div class="container">
+        {% include 'PageBundle:Template:flashMsg.html.twig' %}
+
+        {% form_theme form 'PageBundle:Form:form_template.html.twig' %}
+
+        {{ form_start(form) }}
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {{ pageTitle }}
+                    </div>
+
+                    <div class="panel-body">
+                        {{ form_row(form.title) }}
+                        {#{{ form_row(form.slug) }}#}
+                        {{ form_row(form.content) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Akcje
+                            </div>
+                            <div class="panel-body">
+                                {{ form_row(form.save) }}
+                            </div>
+                        </div>
+                    </div> <!-- .col-md-12 -->
+
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Miniaturka
+                            </div>
+                            <div class="panel-body">
+                                {% if video.thumbnail is null %}
+                                    <p>Brak miniaturki</p>
+                                {% else %}
+                                    <p><img src="{{ asset(video.thumbnail) }}" width="242px" height="200px" alt="" class="img-thumbnail"></p>
+                                {% endif %}
+                                {{ form_row(form.thumbnail) }}
+
+                            </div>
+                        </div>
+                    </div> <!-- .col-md-12 -->
+
+                    {#<div class="col-md-12">#}
+                        {#<div class="panel panel-default">#}
+                            {#<div class="panel-heading">#}
+                                {#Właściwości#}
+                            {#</div>#}
+                            {#<div class="panel-body">#}
+                                {#{{ form_row(form.publishedDate, {'label_length': 5, 'wrapper_length': 7}) }}#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div> <!-- .col-md-12 -->#}
+
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Taksonomie
+                            </div>
+                            <div class="panel-body">
+
+                                {{ form_row(form.category, {'label_length': 3, 'wrapper_length': 9, 'attr': {'class': 'select-block'}}) }}
+
+                                {{ form_row(form.tagline) }}
+                            </div>
+                        </div>
+                    </div> <!-- .col-md-12 -->
+
+                </div>
+            </div>
+
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

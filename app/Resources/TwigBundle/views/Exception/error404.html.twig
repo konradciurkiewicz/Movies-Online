@@ -1,0 +1,30 @@
+{% extends "PageBundle:base.html.twig" %}
+{% block pageTitle %}
+    Nie odnaleziono strony  {{ parent()}}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent()}}
+{% endblock %}
+{% block pageDesc %}
+{% endblock %}
+{% block pageKeywords %}
+
+{% endblock %}
+{% block JavaScripts %}
+    {{ parent()}}
+
+{% endblock %}
+
+
+{% block pageContainer %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="jumbotron">
+                <h1>Nie znaleziono strony...</h1>
+                <p>Strona której szukasz nie została odnaleziona, spróbuj odświeżyć stronę, lub sprawdź czy poprawnie wpisałeś adres w przeglądarce.</p>
+                <p><a class="btn btn-primary btn-lg" href="{{ path('page_index') }}" role="button">Wróć na strone główną</a></p>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

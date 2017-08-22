@@ -1,0 +1,48 @@
+{% extends "PageBundle:base.html.twig" %}
+{% block pageTitle %}
+    Kategoria -  {{ parent()}}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent()}}
+{% endblock %}
+{% block pageDesc %}
+
+{% endblock %}
+{% block pageKeywords %}
+
+{% endblock %}
+{% block JavaScripts %}
+    {{ parent()}}
+
+{% endblock %}
+
+
+{% block pageContainer %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2>Ustawienia konta</h2>
+            <hr/>
+            {% include 'PageBundle:Template:flashMsg.html.twig' %}
+
+            <div class="col-md-5">
+        <h3>Zmień dane konta</h3>
+            {% form_theme accountSettingsForm 'PageBundle:Form:form_template.html.twig' %}
+
+            {{ form_start(accountSettingsForm) }}
+            <div class="media">
+                <div class="media-left">
+                        <img class="media-object" src="..." alt="...">
+                </div>
+                <div class="media-body">
+                    {{ form_row(accountSettingsForm.avatarFile) }}
+                </div>
+            </div>
+            {{ form_rest(accountSettingsForm.avatarFile) }}
+
+
+
+            {{ form_end(accountSettingsForm) }}
+                </div>
+        </div>
+    </div>
+{% endblock %}

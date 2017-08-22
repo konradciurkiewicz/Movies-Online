@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% spaceless %}{% block pageTitle %}- Gdzie oglądać,  filmy online bez rejestracji{% endblock %}{% endspaceless %}</title>
+    <meta name="description" content="{% block pageDesc %}{% endblock %}">
+    <meta name="keywords" content="{% block pageKeywords %}{% endblock %}">
+    <link rel="shortcut icon" href="{{ asset('bundles/page/img/favicon.ico') }}" />
+
+    {% block stylesheets %}
+
+</head>
+<body>
+
+<div class="header">
+    <h2>Gdzie-ogladac.pl - filmy online bez rejestracji</h2>
+</div>
+        {% block pageContainer %}
+
+        {% endblock %}
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% for video in videosList  %}
+    <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="thumbnail" style="height: 350px">
+            <img src="{{ asset(video['thumbnail']) }}"  style="max-height: 200px; max-width: 242px;" href="{{ path('page_video', {'slug':video['slug']}) }}" alt="{{ video['title'] }}">
+            <div class="caption">
+                <h4 style="   -ms-word-break: break-all;
+                                            word-break: break-all;
+                                            -webkit-hyphens: auto;
+                                               -moz-hyphens: auto;
+                                                -ms-hyphens: auto;
+                                                    hyphens: auto;
+            "><a href="{{ path('page_video', {'slug':video['slug']}) }}"> {{ video.title }}</a></h4>
+                <p>{{ video['category'] }}</p>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,366 @@
+{% extends "PageBundle:base.html.twig" %}
+{% block pageTitle %}
+    {{ video.title }} {{ parent()}}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent()}}
+    <style>
+        .video-container {
+            position:relative;
+            padding-bottom:56.25%;
+            padding-top:30px;
+            height:0;
+            overflow:hidden;
+        }
+
+        .video-container iframe, .video-container object, .video-container embed {
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+        }
+    </style>
+{% endblock %}
+{% block pageDesc %}
+    {{ video.title }} - najnowsze seriale, filmy online bez rejestracji. {{ video.title }} i wiele innych filmów znajdziesz na Gdzie Oglądać. Zapraszamy na Gdzie-Ogladac.pl!
+{% endblock %}
+{% block pageKeywords %}
+{% spaceless %}
+    {{ video.tagline }},gdzie oglądać {{ video.title }}, gdzie obejrzeć {{ video.title }},  {{ video.title }} online,  {{ video.title }} lektor pl, gdzie oglądać filmy online, filmy online, bez rejestracji, filmy bez rejestracji, filmy i seriale online, gdzie oglądać filmu online, gdzie oglądać seriale online, gdzie oglądać
+{% endspaceless %}
+{% endblock %}
+{% block JavaScripts %}
+    {{ parent()}}
+    <script>
+        // 2. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '390',
+                width: '640',
+                videoId: 'M7lc1UVf-VE',
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // 4. The API will call this function when the video player is ready.
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        // 5. The API calls this function when the player's state changes.
+        //    The function indicates that when playing a video (state=1),
+        //    the player should play for six seconds and then stop.
+        var done = false;
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING && !done) {
+                setTimeout(stopVideo, 6000);
+                done = true;
+            }
+        }
+        function stopVideo() {
+            player.stopVideo();
+        }
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#add-button").click(function(){
+                $("#add-link").toggle('slow');
+            });
+
+        });
+
+    </script>
+    {% if not app.user %}
+<script>
+    $(window).load(function()
+    {
+        $('#myModal').modal('show');
+    });
+</script>
+{% endif %}
+{% endblock %}
+
+
+{% block pageContainer %}
+{#<div class="panel panel-default hidden-xs hidden-sm">#}
+    {#<div class="panel-body text-center">#}
+        {#<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>#}
+        {#<!-- bilbord v2 -->#}
+        {#<ins class="adsbygoogle"#}
+             {#style="display:inline-block;width:750px;height:300px"#}
+             {#data-ad-client="ca-pub-8378915219431566"#}
+             {#data-ad-slot="8189089334"></ins>#}
+        {#<script>#}
+            {#(adsbygoogle = window.adsbygoogle || []).push({});#}
+        {#</script>#}
+    {#</div>#}
+{#</div>#}
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Top gdzie-ogladac -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-8378915219431566"
+         data-ad-slot="1944079336"
+         data-ad-format="auto"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                 <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                      <img src="{{ asset(video.thumbnail) }}" alt="{{ video.title }}" class="img-thumbnail" style="float: left">
+                 </div>
+                <header>
+                    <div  class="col-md-5 col-lg-5 col-sm-12 col-xs-12">
+                        <h1 style="   -ms-word-break: break-all;
+                                                word-break: break-all;
+                                                -webkit-hyphens: auto;
+                                                   -moz-hyphens: auto;
+                                                    -ms-hyphens: auto;
+                                                        hyphens: auto;
+                                  ">
+                            <a href="{{ path('page_video', {'slug':video.slug}) }}">{{ video.title }}</a>
+                            </h1>
+                            <br/>
+                           <h2> <small>
+                             <a href="{{ path('page_category', {'slug':video.category.slug}) }}">{{ video.category.name }}</a>
+                            </small>
+                           </h2>
+                    </div>
+                </header>
+            <div  class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Informacje</div>
+                    <div class="panel-body">
+                        <dl class="dl-horizontal">
+                            <dt>Autor</dt>
+                            <dd>{{ video.author.username }}</dd>
+                            <dt>Data publikacji</dt>
+                            <dd>{{ video.publishedDate | date('d.m.Y') }}</dd>
+
+                        </dl>
+                    </div>
+                </div>
+
+
+
+            </div>
+            </div>
+            <div style="margin-top: 20px">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- GDZIEOGLADAC3 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8378915219431566"
+                     data-ad-slot="7134818533"
+                     data-ad-format="auto"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <hr/>
+             <div>
+                 <article>
+                  {{ video.content }}
+                 </article>
+                 <hr/>
+             </div>
+            {#<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>#}
+            {#<!-- gdzie-ogladac-movie -->#}
+            {#<ins class="adsbygoogle"#}
+                 {#style="display:block"#}
+                 {#data-ad-client="ca-pub-8378915219431566"#}
+                 {#data-ad-slot="4782192135"#}
+                 {#data-ad-format="auto"></ins>#}
+            {#<script>#}
+                {#(adsbygoogle = window.adsbygoogle || []).push({});#}
+            {#</script>#}
+            <div style="margin-bottom: 20px">
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- GDZIEOGLADAC1 -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8378915219431566"
+                 data-ad-slot="1037376138"
+                 data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+</div>
+    {% if app.user %}
+        <div class="panel panel-default">
+
+                <div class="panel-body">
+                    <button type="button" class="btn btn-raised btn-primary " href="#video-links" id="add-button" ><span class="glyphicon glyphicon-plus"></span> Dodaj link do filmu</button>
+
+                </div>
+            </div>
+    {% else %}
+        <div class="panel panel-warning col-md-12">
+
+            <div class="panel-body">
+                <h4>Zarejestruj się i zarabiaj na dodawaniu linków</h4>
+                <a href="{{ path('page_login') }}" class="btn btn-raised btn-warning  " role="button" ><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp; Zarejestruj się!</a>
+                <a href="{{ path('page_info') }}" class="btn btn-raised btn-default" role="button" ><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp; Dowiedz się więcej</a>
+
+
+            </div>
+        </div>
+    {% endif %}
+
+        </div>
+    </div>
+    <div class="panel panel-primary" id="video-links">
+        <div class="panel-heading"><h4>Oglądaj online</h4></div>
+        <div class="panel-body">
+            {#<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>#}
+            {#<!-- go-movie-3 -->#}
+            {#<ins class="adsbygoogle"#}
+                 {#style="display:block"#}
+                 {#data-ad-client="ca-pub-8378915219431566"#}
+                 {#data-ad-slot="4718016134"#}
+                 {#data-ad-format="auto"></ins>#}
+            {#<script>#}
+                {#(adsbygoogle = window.adsbygoogle || []).push({});#}
+            {#</script>#}
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <div style="margin-bottom: 20px">
+            <!-- GDZIEOGLADAC2 -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8378915219431566"
+                 data-ad-slot="3990842531"
+                 data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            </div>
+         {% if  app.user %}
+             {% include 'PageBundle:Template:flashMsg.html.twig' %}
+
+
+
+             {% form_theme commentForm 'PageBundle:Form:form_template.html.twig' %}
+             <div id="add-link" style="display: none">
+                 <div class="alert alert-info" role="alert">Uwaga! Film do którego chcesz dodać odnośnik, musi być udostępniony legalnie. Wszystkie odnośniki łamiące prawa autorskie zostaną usunięte. Jeśli chcesz dowiedzieć się więcej, wejdź w zakładkę Zasady.</div>
+
+                 {{ form(commentForm, {'action':'#video-links'}) }}
+            </div>
+         {% endif %}
+
+            <div class="list-group">
+                {% set myVal = 1 %}
+                {% for comment in video.comments %}
+             {% if (comment.comment matches '{^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$}') and ( comment.IframeAble == true) %}
+
+                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                     <div class="panel panel-default movie-link">
+                         <div class="panel-heading" role="tab" id="heading{{ myVal }}">
+                             <h4 class="panel-title">
+
+                                 <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ myVal }}" aria-expanded="false" aria-controls="collapse{{ myVal }}">
+                                 <h5>
+                                     {{ comment.title }} <span class="glyphicon glyphicon-chevron-up pull-right" style="font-size: 150%; color: #009688"></span>
+                                 </h5>
+                                     <p class="list-group-item-text" style="   -ms-word-break: break-all;
+                                                word-break: break-all;
+                                                -webkit-hyphens: auto;
+                                                   -moz-hyphens: auto;
+                                                    -ms-hyphens: auto;
+                                                        hyphens: auto;
+                                  ">{{ comment.comment }}</p>
+
+                                 </a>
+                             </h4>
+                         </div>
+                         <div id="collapse{{ myVal }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ myVal }}">
+                             <div class="panel-body">
+
+                                     <div class="video-container col-lg-10 col-lg-offset-1 ">
+                                       <iframe id="player" type="text/html"
+                                             src="{{ comment.comment }}"
+                                             frameborder="0"></iframe>
+                                     </div>
+                             </div>
+                         </div>
+                     </div>
+                     </div>
+                 {% set myVal = myVal + 1 %}
+
+             {% else %}
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab">
+                        <a href="{{ comment.comment }}" rel="nofollow" >
+                        <h5 class="list-group-item-heading">{{ comment.title }} <span class="glyphicon glyphicon-link pull-right" style="font-size: 150%; color: #009688"></span></h5>
+                        <p class="list-group-item-text" style="   -ms-word-break: break-all;
+                                                word-break: break-all;
+                                                -webkit-hyphens: auto;
+                                                   -moz-hyphens: auto;
+                                                    -ms-hyphens: auto;
+                                                        hyphens: auto;
+                                  ">{{ comment.comment }}</p>
+                        </a>
+                        </div>
+
+                </div>
+
+
+             {% endif %}
+         {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {#{% for tag in video.tags %}#}
+            {#<span class="label label-default"> <a href="{{ path('page_tag', {'slug':tag.slug}) }}">{{ tag.name }}</a></span>#}
+
+            {#{% endfor %}#}
+            {{ video.tagline }}
+        </div>
+    </div>
+{% endblock %}
+{% if is_granted('ROLE_ADMIN') %}
+    {% block javasctipts %}
+        {{ parent() }}
+        {#<script>#}
+            {#$(document).ready(function(){#}
+
+                {#$('body').on('click', '#delete-comment', function(e){#}
+                    {#e.preventDefault();#}
+
+                    {#var $btn = $(this);#}
+                    {#var deleteUrl = $btn.attr('href');#}
+
+                    {#$.getJSON(deleteUrl, function(json){#}
+                        {#alert(json.message);#}
+
+                        {#if('ok' === json.status){#}
+                            {#$btn.closest('.list-group-item').remove();#}
+                        {#}#}
+                    {#});#}
+                {#});#}
+
+            {#});#}
+        {#</script>#}
+    {% endblock %}
+{% endif %}

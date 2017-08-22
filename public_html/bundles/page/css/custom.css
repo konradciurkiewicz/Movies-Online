@@ -1,0 +1,22 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 120px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 120px;
+    background-color: #009688;
+    color:#FFFFFF;
+}
+#page-title{
+    font-size:110%;
+    display: inline;
+    font-weight: 400;
+}

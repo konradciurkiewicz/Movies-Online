@@ -1,0 +1,13 @@
+services:
+    page.twig_extension:
+        class: PageBundle\Twig\Extension\PageExtension
+        arguments: ["@doctrine"]
+        tags:
+            - { name: twig.extension }
+    user_mailer:
+        class: PageBundle\Mailer\UserMailer
+        arguments: ["@mailer", "support@gdzie-ogladac.pl", "Gdzie Oglądać"]
+
+    user_manager:
+        class: PageBundle\Manager\UserManager
+        arguments: ['@doctrine', '@router', '@templating', '@security.encoder_factory', '@user_mailer']

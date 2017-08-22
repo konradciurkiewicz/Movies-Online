@@ -1,0 +1,26 @@
+
+{% extends "PageBundle:Email:base.html.twig" %}
+{% block pageTitle %}
+    Rejestracja  {{ parent()}}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent()}}
+{% endblock %}
+{% block pageDesc %}
+
+{% endblock %}
+{% block pageKeywords %}
+
+{% endblock %}
+{% block JavaScripts %}
+    {{ parent()}}
+
+{% endblock %}
+
+
+{% block pageContainer %}
+
+    <h1>Rejestracja nowego użytkownika</h1>
+   <p>Utworzyłeś konto na gdzie-ogladac.pl. Aby je aktywować kliknij w link poniżej:</p>
+    <a href="{{ activationUrl }}">{{ activationUrl }}</a>
+{% endblock %}
